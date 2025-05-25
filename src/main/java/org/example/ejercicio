@@ -1,0 +1,38 @@
+Desarrolla una aplicación Java con JPA que implemente un sistema básico para registrar y
+gestionar información sobre Pokémon, enfocándote en la implementación de herencia y el ciclo
+de vida de entidades.
+Un centro de investigación Pokémon necesita un pequeño sistema para registrar los Pokémon
+capturados y sus características básicas, clasificados por tipos con atributos específicos.
+1. Gestión de Pokémon:
+o Implementar una clase base Pokemon con atributos comunes:
+ ID, nombre, nivel, puntos de salud (HP), ataque, defensa, velocidad
+o Implementar al menos 3 subclases de tipos diferentes:
+ PokemonFuego: temperatura corporal, resistencia al calor
+ PokemonAgua: habilidades de nado, tiempo bajo agua
+ PokemonElectrico: voltaje, capacidad de carga
+o Permitir operaciones CRUD básicas para los Pokémon
+2. Gestión Simplificada de Entrenadores:
+o Crear una entidad Entrenador con datos básicos:
+ Nombre, región, experiencia
+ Relación con sus Pokémon capturados
+
+3. Sistema de Combates:
+o Simular combates entre Pokémon.
+o Calcular daño según tipo, nivel y efectividad
+o Procesar resultados de batallas y actualizar estadísticas
+3. Consulta y Análisis Básico:
+o Implementar 3-4 consultas clave para obtener información relevante:
+ Lista de Pokémon por tipo con estadísticas
+ Entrenadores ordenados por experiencia
+ Pokémon con mejores estadísticas
+
+Importante
+1. Herencia y Polimorfismo:
+o Crear una jerarquía de clases para los diferentes tipos de Pokémon
+o Implementar al menos un método polimórfico (ej: calcularPotencialAtaque())
+2. Mapeo de Herencia en JPA:
+o Implementar una sola estrategia de mapeo:
+ Preferentemente JOINED o SINGLE_TABLE
+o Explicar brevemente la estrategia elegida
+3. Consultas JPA:
+o Implementar consultas utilizando JPQL.
