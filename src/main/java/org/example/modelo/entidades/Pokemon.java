@@ -1,7 +1,8 @@
 package org.example.modelo.entidades;
 
 import jakarta.persistence.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -34,15 +35,17 @@ public abstract class Pokemon{
     @JoinColumn(name = "entrenador_id")
     private Entrenador entrenador;
 
-    @OneToMany
-    @JoinColumn(name = "pokemon_id")
-    private java.util.List<Ataques> ataques;
+    // CORRECCIÓN: Cambiar la relación para que sea bidireccional correctamente
+    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Ataques> ataques = new ArrayList<>();
 
     // Método polimórfico
     public abstract Double calcularPotencialAtaque();
 
     // Constructores
-    public Pokemon() {}
+    public Pokemon() {
+        this.ataques = new ArrayList<>();
+    }
 
     public Pokemon(String nombre, Integer nivel, Integer hp, Integer ataque,
                    Integer defensa, Integer velocidad) {
@@ -52,9 +55,16 @@ public abstract class Pokemon{
         this.ataque = ataque;
         this.defensa = defensa;
         this.velocidad = velocidad;
+        this.ataques = new ArrayList<>();
     }
 
+    // Método de conveniencia para agregar ataques
+    public void agregarAtaque(Ataques ataque) {
+        this.ataques.add(ataque);
+        ataque.setPokemon(this);
+    }
 
+    // Getters y Setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public String getNombre() { return nombre; }
@@ -71,8 +81,8 @@ public abstract class Pokemon{
     public void setVelocidad(Integer velocidad) { this.velocidad = velocidad; }
     public Entrenador getEntrenador() { return entrenador; }
     public void setEntrenador(Entrenador entrenador) { this.entrenador = entrenador; }
-    public java.util.List<Ataques> getAtaques() { return ataques; }
-    public void setAtaques(java.util.List<Ataques> ataques) { this.ataques = ataques; }
+    public List<Ataques> getAtaques() { return ataques; }
+    public void setAtaques(List<Ataques> ataques) { this.ataques = ataques; }
 
     @Override
     public String toString() {
