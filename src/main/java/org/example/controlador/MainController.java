@@ -1,25 +1,42 @@
 package org.example.controlador;
 
+import org.example.vista.MainView;
+import org.example.vista.PokemonView;
+import org.example.vista.AtaquesView;
+import org.example.vista.EntrenadoresView;
+import org.example.vista.CombatesView;
+
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import MainView;
+
 public class MainController {
-    public void addAtaquesButtonListener(ActionListener listener) {
-        ataquesButton.addActionListener(listener);
-    }
+    private MainView mainView;
 
-    public void addPokemonsButtonListener(ActionListener listener) {
-        pokemonsButton.addActionListener(listener);
-    }
+    public MainController(MainView mainView) {
+        this.mainView = mainView;
 
-    public void addEntrenadoresButtonListener(ActionListener listener) {
-        entrenadoresButton.addActionListener(listener);
-    }
+        // Añadir listeners
+        mainView.getPokemonsButton().addActionListener(e -> {
+            // Cargar vista de Pokémons
+            PokemonView pokemonView = new PokemonView();
+            pokemonView.setVisible(true);
+        });
 
-    public void addCombatesButtonListener(ActionListener listener) {
-        combatesButton.addActionListener(listener);
-    }
+        mainView.getAtaquesButton().addActionListener(e -> {
+            AtaquesView ataquesView = new AtaquesView();
+            ataquesView.setVisible(true);
+        });
 
-    public void addPokemonLogoListener(ActionListener listener) {
-        pokemonLogo.addActionListener(listener);
+        mainView.getEntrenadoresButton().addActionListener(e -> {
+            EntrenadoresView entrenadoresView = new EntrenadoresView();
+            entrenadoresView.setVisible(true);
+        });
+
+        mainView.getCombatesButton().addActionListener(e -> {
+            CombatesView combatesView = new CombatesView();
+            combatesView.setVisible(true);
+        });
+
+        // Puedes añadir lógica extra si quieres cerrar la mainView o dejarla abierta
     }
 }

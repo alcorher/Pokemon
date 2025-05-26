@@ -58,7 +58,6 @@ public abstract class Pokemon{
         this.ataques = new ArrayList<>();
     }
 
-    // Método de conveniencia para agregar ataques
     public void agregarAtaque(Ataques ataque) {
         this.ataques.add(ataque);
         ataque.setPokemon(this);

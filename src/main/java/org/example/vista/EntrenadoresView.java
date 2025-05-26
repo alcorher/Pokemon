@@ -2,10 +2,11 @@ package org.example.vista;
 
 import javax.swing.*;
 
-public class Entrenadores {
+public class EntrenadoresView {
     private JPanel panel1;
-    private JButton borrarButton;
+    private JTable table1;
     private JButton añadirButton;
+    private JButton eliminarButton;
     private JButton editarPokemonsButton;
-    private JTable Entrenadores;
+    private JButton editarButton;
 }
