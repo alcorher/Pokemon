@@ -1,12 +1,12 @@
 package org.example.modelo.entidades;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "pokemon")
-public abstract class Pokemon implements Serializable {
+public abstract class Pokemon{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,14 @@ public abstract class Pokemon implements Serializable {
 
     @Column(nullable = false)
     private Integer velocidad;
+
+    @ManyToOne
+    @JoinColumn(name = "entrenador_id")
+    private Entrenador entrenador;
+
+    @OneToMany
+    @JoinColumn(name = "pokemon_id")
+    private java.util.List<Ataques> ataques;
 
     // Método polimórfico
     public abstract Double calcularPotencialAtaque();
@@ -61,6 +69,10 @@ public abstract class Pokemon implements Serializable {
     public void setDefensa(Integer defensa) { this.defensa = defensa; }
     public Integer getVelocidad() { return velocidad; }
     public void setVelocidad(Integer velocidad) { this.velocidad = velocidad; }
+    public Entrenador getEntrenador() { return entrenador; }
+    public void setEntrenador(Entrenador entrenador) { this.entrenador = entrenador; }
+    public java.util.List<Ataques> getAtaques() { return ataques; }
+    public void setAtaques(java.util.List<Ataques> ataques) { this.ataques = ataques; }
 
     @Override
     public String toString() {
