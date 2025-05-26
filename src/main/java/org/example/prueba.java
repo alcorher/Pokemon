@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.modelo.entidades.*;
 import org.example.modelo.dao.CombatesDAO;
+import org.example.vista.MainView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,8 @@ public class prueba {
 
         try {
             System.out.println("Conexion exitosa a la base de datos!");
+            MainView mainView = new MainView();
+            mainView.setVisible(true);
 
             em.getTransaction().begin();
 
@@ -241,6 +244,7 @@ public class prueba {
         } finally {
             em.close();
             emf.close();
+
         }
     }
 
