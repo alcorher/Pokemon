@@ -10,10 +10,10 @@ public class MainView {
     private JButton combatesButton;
     private JButton pokemonLogo;
 
-public void setVisible(boolean b) {
-    JFrame frame = new JFrame("Pokemon Management");
-    frame.setContentPane(panel1);
-    frame.pack();
-    frame.setVisible(b);
-}
+    public void setVisible(boolean b) {
+        JFrame frame = new JFrame("Pokemon Management");
+        frame.setContentPane(panel1);
+        frame.pack();
+        frame.setVisible(b);
+    }
 }

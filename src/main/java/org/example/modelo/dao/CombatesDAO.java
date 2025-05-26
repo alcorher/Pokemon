@@ -1,12 +1,39 @@
 package org.example.modelo.dao;
 
-import org.example.modelo.entidades.Entrenador;
-import org.example.modelo.entidades.Pokemon;
+import org.example.modelo.entidades.*;
 
 import java.util.List;
 
 public class CombatesDAO {
 
+    private double calcularEfectividad(Pokemon atacante, Pokemon defensor) {
+        // Fuego vs otros tipos
+        if (atacante instanceof PokemonFuego) {
+            if (defensor instanceof PokemonElectrico) {
+                return 1.5; // Fuego fuerte contra Eléctrico
+            } else if (defensor instanceof PokemonAgua) {
+                return 0.5; // Fuego débil contra Agua
+            }
+        }
+        // Agua vs otros tipos
+        else if (atacante instanceof PokemonAgua) {
+            if (defensor instanceof PokemonFuego) {
+                return 1.5; // Agua fuerte contra Fuego
+            } else if (defensor instanceof PokemonElectrico) {
+                return 0.5; // Agua débil contra Eléctrico
+            }
+        }
+        // Eléctrico vs otros tipos
+        else if (atacante instanceof PokemonElectrico) {
+            if (defensor instanceof PokemonAgua) {
+                return 1.5; // Eléctrico fuerte contra Agua
+            } else if (defensor instanceof PokemonFuego) {
+                return 0.5; // Eléctrico débil contra Fuego
+            }
+        }
+
+        return 1.0; // Efectividad normal (mismo tipo o sin ventaja/desventaja)
+    }
     private void atacar(Pokemon atacante, Pokemon defensor) {
         if (atacante.getAtaques() == null || atacante.getAtaques().isEmpty()) {
             System.out.println(atacante.getNombre() + " no tiene ataques para usar.");
@@ -19,7 +46,7 @@ public class CombatesDAO {
         // Cálculo de daño más balanceado
         // Reducimos significativamente el impacto del potencial de ataque y la potencia del ataque
         double danoBase = (atacante.getAtaque() * 0.3) + (ataque.getPotencia() * 0.2);
-        double danoFinal = Math.max(1, danoBase - (defensor.getDefensa() * 0.2));
+        double danoFinal = Math.max(1, danoBase - (defensor.getDefensa() * 0.2))* calcularEfectividad(atacante, defensor);
 
         int vidaRestante = defensor.getHp() - (int) Math.ceil(danoFinal);
         defensor.setHp(Math.max(0, vidaRestante));
